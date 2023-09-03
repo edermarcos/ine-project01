@@ -1,0 +1,26 @@
+<section class="min-h-screen bg-slate-100 grid place-content-center">
+  <section class="bg-white p-8 rounded-md shadow w-[600px]">
+    <h2 class="text-3xl text-center mb-8">Inicia Sesion</h2>
+
+    <form [formGroup]="form">
+      <div class="mb-6">
+        <label for="email" class="block font-medium mb-2">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg" required
+          formControlName="email" />
+      </div>
+
+      <div class="mb-12">
+        <label for="password" class="block font-medium mb-2">Contraseña:</label>
+        <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-lg" required
+          formControlName="password" />
+      </div>
+
+      <div>
+        <button type="submit" (click)="submitHandle()" [ngClass]="{ 'cursor-not-allowed opacity-50': !form.valid }"
+          class="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
+          Iniciar sesión
+        </button>
+      </div>
+    </form>
+  </section>
+</section>
