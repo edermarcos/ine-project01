@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,19 +14,29 @@ import {
 })
 export class LoginComponent {
   form: FormGroup;
+  isLoading = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.form = formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', []),
     });
   }
 
-  submitHandle(): void {
+  fakeLogin(): Promise<void> {
+    return new Promise(async (resolve) => {
+      await setTimeout(() => resolve(), 2000);
+    });
+  }
+
+  async submitHandle(): Promise<void> {
     if (this.form.invalid) {
       return;
     }
+    this.isLoading = true;
 
-    console.log(this.form.value);
+    await this.fakeLogin();
+    this.isLoading = false;
+    this.router.navigate(['/pages/dashboard']);
   }
 }

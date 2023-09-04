@@ -1,5 +1,5 @@
-<section class="min-h-screen bg-slate-100 grid place-content-center">
-  <section class="bg-white p-8 rounded-md shadow w-[600px]">
+<section class="min-h-screen grid place-items-center px-8 lg:px-0 container mx-auto">
+  <section class="bg-white p-8 rounded-md shadow w-full lg:w-[600px]">
     <h2 class="text-3xl text-center mb-8">Inicia Sesion</h2>
 
     <form [formGroup]="form">
@@ -16,8 +16,17 @@
       </div>
 
       <div>
-        <button type="submit" (click)="submitHandle()" [ngClass]="{ 'cursor-not-allowed opacity-50': !form.valid }"
-          class="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200">
+        <button type="submit" (click)="submitHandle()" [ngClass]="{ 'cursor-not-allowed opacity-50': isLoading || !form.valid }"
+          class="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200 flex justify-center">
+          <ng-container *ngIf="isLoading">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.373a8 8 0 014.373-4.373L4 16.373zm2 0a8 8 0 004.373 4.373L6 16.373z">
+              </path>
+            </svg>
+          </ng-container>
           Iniciar sesión
         </button>
       </div>

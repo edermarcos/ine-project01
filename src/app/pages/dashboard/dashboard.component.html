@@ -1,1 +1,11 @@
-<p>dashboard works!</p>
+<section class="min-h-screen py-[80px] container mx-auto ">
+  <h2 class="text-5xl mb-8">Dashboard</h2>
+
+  <section class="lg:w-[300px] mx-auto">
+    <select
+      class="w-full shadow-sm py-4 px-6 rounded border"
+      [(ngModel)]="selectedOption" (change)="handleOption()">
+      <option *ngFor="let item of options" [value]="item.title">{{item.title}}</option>
+    </select>
+  </section>
+</section>
