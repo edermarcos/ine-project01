@@ -1,11 +1,20 @@
-<section class="min-h-screen py-[80px] container mx-auto ">
-  <h2 class="text-5xl mb-8">Dashboard</h2>
+<section class="min-h-screen py-[80px] container mx-auto">
+  <h2 class="text-5xl mb-6">Bienvenido</h2>
 
-  <section class="lg:w-[300px] mx-auto">
+  <section class="mb-4">
+    <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  </section>
+
+  <section class="lg:w-[300px] mx-auto mb-8">
     <select
-      class="w-full shadow-sm py-4 px-6 rounded border"
-      [(ngModel)]="selectedOption" (change)="handleOption()">
-      <option *ngFor="let item of options" [value]="item.title">{{item.title}}</option>
+      class="w-full shadow-sm py-4 px-6 rounded-lg border"
+      [(ngModel)]="selectedOption"
+      (change)="handleOption()">
+      <option *ngFor="let item of options" [value]="item.param">{{item.displayText}}</option>
     </select>
+  </section>
+
+  <section>
+    <router-outlet></router-outlet>
   </section>
 </section>

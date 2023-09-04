@@ -1,12 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
+import { UsersTableComponent } from './users-table/users-table.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    UsersTableComponent,
+    BreadcrumbComponent,
+  ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    RouterLink,
+  ],
+  exports: [
+    UsersTableComponent,
+    BreadcrumbComponent,
+  ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {
+}

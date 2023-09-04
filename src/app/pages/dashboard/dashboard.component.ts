@@ -1,40 +1,67 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   options: IOption[];
-  selectedOption: string;
+  switchOptions = {
+    USERS: 'users',
+    PRODUCTS: 'products',
+    SALES: 'sales',
+    STATS: 'stats',
+  };
+  selectedOption: string = '';
+  breadcrumb: string[] = [];
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+  ) {
     this.options = [
       {
-        title: 'Módulo de usuarios',
-        url: 'https://www.google.com',
+        displayText: 'Módulo de usuarios',
+        param: this.switchOptions.USERS,
       },
       {
-        title: 'Modulo de productos',
-        url: 'https://www.google.com',
+        displayText: 'Modulo de productos',
+        param: this.switchOptions.PRODUCTS,
       },
       {
-        title: 'Modulo de ventas',
-        url: 'https://www.google.com',
+        displayText: 'Modulo de ventas',
+        param: this.switchOptions.SALES,
+      },
+      {
+        displayText: 'Modulo de Stats',
+        param: this.switchOptions.STATS,
       },
     ];
-    this.selectedOption = this.options[0].title;
+
+    this.handlePath(this.router.url)
+  }
+
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.handlePath(event.url)
+      }
+    })
+  }
+
+  handlePath(url: string): void {
+    this.breadcrumb = url.split('/').slice(3);
+    this.selectedOption = this.breadcrumb[0];
   }
 
   handleOption(): void {
-    console.log(this.selectedOption);
-    // this.router.navigate(['dashboard'], { queryParams: { q: option.title } });
+    this.router.navigate(['pages', 'dashboard', this.selectedOption]);
   }
 }
 
 export interface IOption {
-  title: string;
-  url: string;
+  displayText: string;
+  param: string;
 }
+
