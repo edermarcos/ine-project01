@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'login'
+    loadChildren: ()=> import('./pages/not-found/not-found.module').then(m => m.NotFoundModule)
   }
 ];
 
